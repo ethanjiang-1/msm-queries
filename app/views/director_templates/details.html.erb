@@ -1,0 +1,46 @@
+<h1>Director #<%= @dir.id%> Details</h1>
+<a href="/directors">Go back</a>
+<hr>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= @dir.name %></dd>
+
+  <dt>Dob</dt>
+  <dd><%= @dir.dob %></dd>
+
+  <dt>Bio</dt>
+  <dd><%= @dir.bio %></dd>
+
+  <dt>Image</dt>
+  <dd><img src="<%= @dir.image %>" width="200"></dd>
+
+  <dt>Created at</dt>
+  <dd><%= @dir.created_at %></dd>
+
+  <dt>Updated at</dt>
+  <dd><%= @dir.updated_at %></dd>
+</dd>
+
+<% matching_movies = Movie.where({ :director_id => @dir.id })%>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+
+  <% matching_movies.each do |movie| %>
+    <tr>
+      <td><%= movie.id %></td>
+      <td><img src="<%= movie.image %>" width="200"></td>
+      <td><%= movie.title %></td>
+      <td><%= movie.year %></td>
+      <td><%= @dir.name %></td>
+      <td><a href="/movies/<%= movie.id %>">Show details</a></td>
+    </tr>
+  <% end %>
+</table>
